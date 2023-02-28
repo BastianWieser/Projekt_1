@@ -21,6 +21,7 @@ from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLi
 class Calculator(QWidget):
     def __init__(self):
         super().__init__()
+        result = 0
 
         #window title 
         self.setWindowTitle('Calculator')
@@ -123,13 +124,15 @@ class Calculator(QWidget):
         self.result_display.setText('')
 
     # calculate result and show on display
-    def result_calc(self):
+    def result_calc(self,result):
         try:
+
             expr = self.result_display.text()
             # replace 'j' with 'j' * 1j to create complex numbers
             expr = expr.replace('j', 'j*1j')
-            # evaluate the expression using eval
+            # evaluate the expression using eval()
             result = eval(expr)
+
             # check if the result is a complex number and format it accordingly
             if isinstance(result, complex):
                 result = '{:.2f}'.format(result.real)
@@ -139,7 +142,7 @@ class Calculator(QWidget):
         except (SyntaxError, ZeroDivisionError, TypeError):
             self.result_display.setText('Error')
 
-
+    
 
 
 #execute programm
