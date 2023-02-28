@@ -3,6 +3,7 @@ GUI-Calculator
 Die GUI ist fertig, vielleicht muss sie ein wenig angepasst werden,
 abhängig von den zusätzlichen Rechenfunktionen. 
 Es sind keine Rechenfunktionen momentan vorhanden. Nur eine optische GUI
+außer clear function und eingabe option
 by tobias
 26.02.2023
 <<<<<<< HEAD
@@ -19,7 +20,7 @@ by Kadir
 """
 import cmath
 import sys
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton
+from PyQt6.QtWidgets import *
 
 class Calculator(QWidget):
     def __init__(self):
@@ -82,7 +83,6 @@ class Calculator(QWidget):
         hbox4.addWidget(self.button_kom)
         hbox4.addWidget(self.button_0)
         hbox4.addWidget(self.button_img)
-
         hbox4.addWidget(self.button_div)
 
         hbox5.addWidget(self.button_result)
@@ -118,6 +118,10 @@ class Calculator(QWidget):
         self.button_result.clicked.connect(self.result_calc)
         self.button_clear.clicked.connect(self.clear_display)
 
+        #self.button_clear.clicked.connect(self.save_function)
+        #self.button_clear.clicked.connect(self.load_function)
+        #self.button_quit.clicked.connect(self.quit_function)
+
     #show number or function on button
     def show_display(self, text):
         current_text = self.result_display.text()
@@ -127,12 +131,15 @@ class Calculator(QWidget):
     #clear numbers, calculation
     def clear_display(self):
         self.result_display.setText('')
+        message = QMessageBox()
+        message.setIcon(QMessageBox.Icon.Information)
+        message.setWindowTitle("note")
+        message.setText("Calculation cleared!")
+        message.exec()
 
-
-    # calculate result and show on display
+    #calculate result and show on display
     def result_calc(self,result):
         try:
-
             expr = self.result_display.text()
             # replace 'j' with 'j' * 1j to create complex numbers
             expr = expr.replace('j', 'j*1j')
