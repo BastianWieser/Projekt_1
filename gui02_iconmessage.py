@@ -78,13 +78,13 @@ class Calculator(QWidget):
 
         hbox5.addWidget(self.button_result)
 
+        vbox.addWidget(self.result_display)
         vbox.addLayout(hbox0)
         vbox.addLayout(hbox1)
         vbox.addLayout(hbox2)
         vbox.addLayout(hbox3)
         vbox.addLayout(hbox4)
         vbox.addLayout(hbox5)
-        vbox.addWidget(self.result_display)
 
         self.setLayout(vbox)
         
