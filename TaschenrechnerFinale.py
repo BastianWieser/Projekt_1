@@ -22,6 +22,9 @@ Erwiterung des programmes um mehr commits zu kriegen
 28.2
 by Kadir Tas
 """
+
+#Github ist Cool
+
 import sys
 from PyQt6.QtWidgets import *
 class Calculator(QWidget):
