@@ -68,7 +68,11 @@ class Calculator(QWidget):
         hbox4 = QHBoxLayout()
         hbox5 = QHBoxLayout()
         
+        hbox0.addWidget(self.button_save)
+        hbox0.addWidget(self.button_load)
+        hbox0.addWidget(self.button_quit)
         hbox0.addWidget(self.button_clear)
+
         hbox1.addWidget(self.button_7)
         hbox1.addWidget(self.button_8)
         hbox1.addWidget(self.button_9)
