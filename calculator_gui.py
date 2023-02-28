@@ -21,7 +21,6 @@ by Kadir
 import cmath
 import sys
 from PyQt6.QtWidgets import *
-
 class Calculator(QWidget):
     def __init__(self):
         super().__init__()
@@ -126,10 +125,9 @@ class Calculator(QWidget):
 
         self.button_result.clicked.connect(self.result_calc)
         self.button_clear.clicked.connect(self.clear_display)
-
-        #self.button_clear.clicked.connect(self.save_function)
-        #self.button_clear.clicked.connect(self.load_function)
-        #self.button_quit.clicked.connect(self.quit_function)
+        self.button_save.clicked.connect(self.save_function)
+        self.button_load.clicked.connect(self.load_function)
+        self.button_quit.clicked.connect(self.quit_function)
 
     #show number or function on button
     def show_display(self, text):
@@ -145,7 +143,9 @@ class Calculator(QWidget):
         message.setWindowTitle("note")
         message.setText("Calculation cleared!")
         message.exec()
-
+        
+    
+        
     #calculate result and show on display
     def result_calc(self,result):
         try:
@@ -163,8 +163,27 @@ class Calculator(QWidget):
             self.result_display.setText(result)
         except (SyntaxError, ZeroDivisionError, TypeError):
             self.result_display.setText('Error')
-
-#execute programm
+        self.save_result = result
+            
+    def save_function(self):
+        save_data = f"{self.save_result}" #makes the result a string
+        f = QFileDialog.getSaveFileName(self) #makes a new file an lets you save it
+        with open (f[0], "w+") as fobj:
+            fobj.write(save_data)
+            
+    def load_function(self):
+        loadresult= QFileDialog.getOpenFileName(self)
+        with open (loadresult[0], "r") as fobj:
+            read = fobj.readline()
+            self.show_display(read)
+            
+    def quit_function(self):
+        sys.exit()
+            
+            
+        
+        
+#execute programms
 if(__name__ == '__main__'):
     app = QApplication(sys.argv)
     calculator = Calculator()
