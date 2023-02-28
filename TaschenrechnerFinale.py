@@ -17,6 +17,10 @@ Erweiterung der GUI mit den benötigten Funktionen um einfache arithmetische Rec
 - result_calc()
 by Kadir
 27.02.2023
+
+Erwiterung des programmes um mehr commits zu kriegen
+28.2
+by Kadir Tas
 """
 import sys
 from PyQt6.QtWidgets import *
@@ -65,6 +69,7 @@ class Calculator(QWidget):
         hbox4 = QHBoxLayout()
         hbox5 = QHBoxLayout()
         
+        #Adding Widgets/Buttons
         hbox0.addWidget(self.button_save)
         hbox0.addWidget(self.button_load)
         hbox0.addWidget(self.button_quit)
@@ -93,6 +98,7 @@ class Calculator(QWidget):
         hbox5.addWidget(self.button_result)
 
         vbox.addWidget(self.result_display)
+        # Layout
         vbox.addLayout(hbox0)
         vbox.addLayout(hbox1)
         vbox.addLayout(hbox2)
@@ -174,7 +180,8 @@ class Calculator(QWidget):
         with open (loadresult[0], "r") as fobj:
             read = fobj.readline()
             self.show_display(read)
-            
+    
+    #Closes the Application
     def quit_function(self):
         sys.exit()
             
