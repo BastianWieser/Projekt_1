@@ -24,6 +24,7 @@ by Kadir Tas
 """
 
 #Github ist Cool
+#Commits weil der Lehrer es will
 
 import sys
 from PyQt6.QtWidgets import *
