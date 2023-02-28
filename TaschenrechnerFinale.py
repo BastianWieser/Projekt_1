@@ -3,9 +3,13 @@ GUI-Calculator
 Die GUI ist fertig, vielleicht muss sie ein wenig angepasst werden,
 abhängig von den zusätzlichen Rechenfunktionen. 
 Es sind keine Rechenfunktionen momentan vorhanden. Nur eine optische GUI
+außer clear function und eingabe option
 by tobias
 26.02.2023
+<<<<<<< HEAD
+"""
 
+"""
 Branch von der GUI
 Erweiterung der GUI mit den benötigten Funktionen um einfache arithmetische Rechnungen und complexe zahlen zu rechnen
 +Erweiterung der GUI mit Komma, imaginäres j 
@@ -16,11 +20,11 @@ by Kadir
 """
 import cmath
 import sys
-from PyQt6.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLineEdit, QPushButton
-
+from PyQt6.QtWidgets import *
 class Calculator(QWidget):
     def __init__(self):
         super().__init__()
+        result = 0
 
         #window title 
         self.setWindowTitle('Calculator')
@@ -44,10 +48,15 @@ class Calculator(QWidget):
         self.button_sub = QPushButton('-')
         self.button_mul = QPushButton('*')
         self.button_div = QPushButton('/')
+
         self.button_kom = QPushButton('.')
         self.button_img = QPushButton('j')
         self.button_result = QPushButton('=')
         self.button_clear = QPushButton('Clear')
+
+        self.button_save = QPushButton('Save')
+        self.button_load = QPushButton('Load')
+        self.button_quit = QPushButton('Quit')
 
         #create button layout, vertical and horizontal
         vbox = QVBoxLayout()
@@ -58,7 +67,11 @@ class Calculator(QWidget):
         hbox4 = QHBoxLayout()
         hbox5 = QHBoxLayout()
         
+        hbox0.addWidget(self.button_save)
+        hbox0.addWidget(self.button_load)
+        hbox0.addWidget(self.button_quit)
         hbox0.addWidget(self.button_clear)
+
         hbox1.addWidget(self.button_7)
         hbox1.addWidget(self.button_8)
         hbox1.addWidget(self.button_9)
@@ -108,9 +121,13 @@ class Calculator(QWidget):
         self.button_div.clicked.connect(lambda: self.show_display('/'))
         self.button_kom.clicked.connect(lambda: self.show_display('.'))
         self.button_img.clicked.connect(lambda: self.show_display('j'))
+        
 
         self.button_result.clicked.connect(self.result_calc)
         self.button_clear.clicked.connect(self.clear_display)
+        self.button_save.clicked.connect(self.save_function)
+        self.button_load.clicked.connect(self.load_function)
+        self.button_quit.clicked.connect(self.quit_function)
 
     #show number or function on button
     def show_display(self, text):
@@ -121,41 +138,54 @@ class Calculator(QWidget):
     #clear numbers, calculation
     def clear_display(self):
         self.result_display.setText('')
-
-    # calculate result and show on display
-    def result_calc(self):
+        message = QMessageBox()
+        message.setIcon(QMessageBox.Icon.Information)
+        message.setWindowTitle("note")
+        message.setText("Calculation cleared!")
+        message.exec()
+        
+    
+        
+    #calculate result and show on display
+    def result_calc(self,result):
         try:
             expr = self.result_display.text()
             # replace 'j' with 'j' * 1j to create complex numbers
             expr = expr.replace('j', 'j*1j')
-            # evaluate the expression using eval
+            # evaluate the expression using eval()
             result = eval(expr)
+
             # check if the result is a complex number and format it accordingly
             if isinstance(result, complex):
                 result = '{:.2f}'.format(result.real)
             else:
                 result = str(result)
-                f = open("testfile.txt", "w")
-                f.write(result)
-                f.close()
-
-                #open and read the file after the overwriting and creating:
-                f = open("testfile.txt", "r")
-                print(f.read())
-
             self.result_display.setText(result)
         except (SyntaxError, ZeroDivisionError, TypeError):
             self.result_display.setText('Error')
+        self.save_result = result
             
-
-
-
-
-#execute programm
+    def save_function(self):
+        save_data = f"{self.save_result}" #makes the result a string
+        f = QFileDialog.getSaveFileName(self) #makes a new file an lets you save it
+        with open (f[0], "w+") as fobj:
+            fobj.write(save_data)
+            
+    def load_function(self):
+        loadresult= QFileDialog.getOpenFileName(self)
+        with open (loadresult[0], "r") as fobj:
+            read = fobj.readline()
+            self.show_display(read)
+            
+    def quit_function(self):
+        sys.exit()
+            
+            
+        
+        
+#execute programms
 if(__name__ == '__main__'):
     app = QApplication(sys.argv)
     calculator = Calculator()
     calculator.show()
     sys.exit(app.exec())
-    
-    
