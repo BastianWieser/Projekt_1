@@ -55,6 +55,10 @@ class Calculator(QWidget):
         self.button_result = QPushButton('=')
         self.button_clear = QPushButton('Clear')
 
+        self.button_save = QPushButton('Save')
+        self.button_load = QPushButton('Load')
+        self.button_quit = QPushButton('Quit')
+
         #create button layout, vertical and horizontal
         vbox = QVBoxLayout()
         hbox0 = QHBoxLayout()
@@ -114,6 +118,7 @@ class Calculator(QWidget):
         self.button_div.clicked.connect(lambda: self.show_display('/'))
         self.button_kom.clicked.connect(lambda: self.show_display('.'))
         self.button_img.clicked.connect(lambda: self.show_display('j'))
+        
 
         self.button_result.clicked.connect(self.result_calc)
         self.button_clear.clicked.connect(self.clear_display)
