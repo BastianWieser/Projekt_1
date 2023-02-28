@@ -1,30 +1,5 @@
-"""
-GUI-Calculator
-Die GUI ist fertig, vielleicht muss sie ein wenig angepasst werden,
-abhängig von den zusätzlichen Rechenfunktionen. 
-Es sind keine Rechenfunktionen momentan vorhanden. Nur eine optische GUI
-außer clear function und eingabe option
-by tobias
-26.02.2023
-<<<<<<< HEAD
-"""
 
-"""
-Branch von der GUI
-Erweiterung der GUI mit den benötigten Funktionen um einfache arithmetische Rechnungen und complexe zahlen zu rechnen
-+Erweiterung der GUI mit Komma, imaginäres j 
-+Funktion die hinzugefügt wurden:
-- result_calc()
-by Kadir
-27.02.2023
-
-Erwiterung des programmes um mehr commits zu kriegen
-28.2
-by Kadir Tas
-"""
-
-#Github ist Cool
-#Commits weil der Lehrer es will
+#Taschenrechner by Kadir Tas, Bastian Wieser, Tobias Grill
 
 import sys
 from PyQt6.QtWidgets import *
