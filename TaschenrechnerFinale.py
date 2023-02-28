@@ -18,13 +18,11 @@ Erweiterung der GUI mit den benötigten Funktionen um einfache arithmetische Rec
 by Kadir
 27.02.2023
 """
-import cmath
 import sys
 from PyQt6.QtWidgets import *
 class Calculator(QWidget):
     def __init__(self):
         super().__init__()
-        result = 0
 
         #window title 
         self.setWindowTitle('Calculator')
